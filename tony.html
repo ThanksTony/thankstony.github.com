@@ -22,7 +22,7 @@ function xmlParser(xml) {
     $(xml).find("fb").each(function () {
        var jsonp = 'https://graph.facebook.com/'+ $(this).find("id").text();
        $.getJSON(jsonp, function(data) {
-          $(".main").append('<div class="person"><a href="' + data.link +'" target="_blank" style=" background-image:url(https://graph.facebook.com/'+ data.id +'/picture?width=200&height=200)"><span>' + data.name + '</span></a></div>');
+          $(".main").append('<div class="person"><a href="https://facebook.com/' + data.id +'" target="_blank" style=" background-image:url(https://graph.facebook.com/'+ data.id +'/picture?width=200&height=200)"><span>' + data.name + '</span></a></div>');
           $(".book").fadeIn(1000);
         });
     });
@@ -30,7 +30,6 @@ function xmlParser(xml) {
 </script>
 
 <style> 
-
 .main{
   width:68.571428571rem;
   margin:0 auto;
@@ -88,15 +87,12 @@ function xmlParser(xml) {
   background-color:#;
 
 }
-
-
 </style> 
 
 
 
 </head>
 <body>
-
 
 <div class="main">
 <img id="top_img" src="./img/top.jpg" />
@@ -108,6 +104,5 @@ function xmlParser(xml) {
 <div class="clear"></div>
 
 </div>
-
 </body>
 </html>

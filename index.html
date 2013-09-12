@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Thanks Tony!</title>
+<link href="../style.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+<script>
+$(document).ready(function () {
+    $.ajax({
+        type: "GET",
+        url: "fb.xml",
+        dataType: "xml",
+        success: xmlParser
+    });
+});
+
+function xmlParser(xml) {
+    $('#load').fadeOut();
+
+    $(xml).find("fb").each(function () {
+       var jsonp = 'https://graph.facebook.com/'+ $(this).find("id").text();
+       $.getJSON(jsonp, function(data) {
+          $(".main").append('<div class="person"><a href="' + data.link +'" target="_blank" style=" background-image:url(https://graph.facebook.com/'+ data.id +'/picture?width=200&height=200)"><span>' + data.name + '</span></a></div>');
+          $(".book").fadeIn(1000);
+        });
+    });
+}
+</script>
+
+<style> 
+
+.main{
+  width:68.571428571rem;
+  margin:0 auto;
+  height:130px;
+}
+
+
+@media screen and (max-width:1100px) {
+  .main{
+    width:100%;
+    margin:0 auto;
+  }
+}
+ 
+.person{
+  width:150px;
+  float:left;
+  margin:10px;
+  border:1px #dedede solid;
+  padding:5px;
+}
+
+.person a{
+  display:block;
+  width:150px;
+  height:150px;
+  background-size:150px 150px;
+  text-decoration: none;
+  position: relative;
+  margin:0 auto;
+}
+
+.person a span{
+  position:absolute;
+  bottom: 0;
+  display: block;
+  color: #fff;
+  width: 150px;
+  min-height: 40px;
+  background: url(./img/transparent1.png);
+  padding: 2px 0 0 3px;
+}
+
+
+#top_img, #tony{
+  width:100%;
+  height:auot;
+}
+
+.loader{
+  height:11px;
+}
+
+.footer{
+  background-color:#;
+
+}
+
+
+</style> 
+
+
+
+</head>
+<body>
+
+
+<div class="main">
+<img id="top_img" src="./img/top.jpg" />
+<img id="tony" src="./img/tony.jpg" />
+<div align="center" class="loader"><img src="loader.gif" id="load" width="16" height="11" align="absmiddle"/></div>
+<div class="footer"></div>
+</div>
+
+<div class="clear"></div>
+
+</div>
+
+</body>
+</html>

@@ -1,74 +1,113 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Thanks Tony!</title>
+<link href="../style.css" rel="stylesheet" type="text/css" />
 
-  <head>
-    <meta charset='utf-8' />
-    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="Thankstony.github.com : Tony" />
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+<script>
+$(document).ready(function () {
+    $.ajax({
+        type: "GET",
+        url: "fb.xml",
+        dataType: "xml",
+        success: xmlParser
+    });
+});
 
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+function xmlParser(xml) {
+    $('#load').fadeOut();
 
-    <title>Thankstony.github.com</title>
-  </head>
+    $(xml).find("fb").each(function () {
+       var jsonp = 'https://graph.facebook.com/'+ $(this).find("id").text();
+       $.getJSON(jsonp, function(data) {
+          $(".main").append('<div class="person"><a href="' + data.link +'" target="_blank" style=" background-image:url(https://graph.facebook.com/'+ data.id +'/picture?width=200&height=200)"><span>' + data.name + '</span></a></div>');
+          $(".book").fadeIn(1000);
+        });
+    });
+}
+</script>
 
-  <body>
+<style> 
 
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/ThanksTony">View on GitHub</a>
+.main{
+  width:68.571428571rem;
+  margin:0 auto;
+  height:130px;
+}
 
-          <h1 id="project_title">Thankstony.github.com</h1>
-          <h2 id="project_tagline">Tony</h2>
 
-        </header>
-    </div>
+@media screen and (max-width:1100px) {
+  .main{
+    width:100%;
+    margin:0 auto;
+  }
+}
+ 
+.person{
+  width:150px;
+  float:left;
+  margin:10px;
+  border:1px #dedede solid;
+  padding:5px;
+}
 
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        <h3>
-<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
+.person a{
+  display:block;
+  width:150px;
+  height:150px;
+  background-size:150px 150px;
+  text-decoration: none;
+  position: relative;
+  margin:0 auto;
+}
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
+.person a span{
+  position:absolute;
+  bottom: 0;
+  display: block;
+  color: #fff;
+  width: 150px;
+  min-height: 40px;
+  background: url(./img/transparent1.png);
+  padding: 2px 0 0 3px;
+}
 
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
-</code></pre>
 
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
+#top_img, #tony{
+  width:100%;
+  height:auot;
+}
 
-<h3>
-<a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Designer Templates</h3>
+.loader{
+  height:11px;
+}
 
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
+.footer{
+  background-color:#;
 
-<h3>
-<a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Rather Drive Stick?</h3>
+}
 
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
 
-<h3>
-<a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
+</style> 
 
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
 
-<h3>
-<a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
 
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
-      </section>
-    </div>
+</head>
+<body>
 
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
-      </footer>
-    </div>
 
-    
+<div class="main">
+<img id="top_img" src="./img/top.jpg" />
+<img id="tony" src="./img/tony.jpg" />
+<div align="center" class="loader"><img src="loader.gif" id="load" width="16" height="11" align="absmiddle"/></div>
+<div class="footer"></div>
+</div>
 
-  </body>
+<div class="clear"></div>
+
+</div>
+
+</body>
 </html>

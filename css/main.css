@@ -29,6 +29,30 @@
   margin:0 auto;
 }
 
+.pic{
+  width:150px;
+  float:left;
+  margin:10px;
+  border:1px #dedede solid;
+  padding:5px;
+}
+
+.pic a{
+  display:block;
+  width:150px;
+  height:150px;
+  background-size:150px 150px;
+  text-decoration: none;
+  position: relative;
+  margin:0 auto;
+}
+
+
+
+
+
+
+
 .person a span{
   position:absolute;
   bottom: 0;

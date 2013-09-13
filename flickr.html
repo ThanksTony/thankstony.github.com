@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Thanks Tony!</title>
+<link href="./css/main.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+
+
+
+</head>
+<body>
+
+<div class="main">
+  <img id="top_img" src="./img/top.jpg" />
+  <div align="center" class="loader"><img src="loader.gif" id="load" width="16" height="11" align="absmiddle"/></div>
+  <div id="flickr-images">
+  </div>
+  <div class="footer"></div>
+</div>
+<div class="clear"></div>
+</body>
+<script type="text/javascript">
+/**
+ * Function to get images from Flickr
+ *
+ * @setId The flickr set the images belong to.
+ */  
+function getImgs(setId) {
+  var URL = "http://api.flickr.com/services/rest/" +  // Wake up the Flickr API gods.
+    "?method=flickr.photosets.getPhotos" +  // Get photo from a photoset. http://www.flickr.com/services/api/flickr.photosets.getPhotos.htm
+    "&api_key=87b145e23194d08cdecbc78ba9514550" +  // API key. Get one here: http://www.flickr.com/services/apps/create/apply/
+    "&photoset_id=" + setId +  // The set ID.
+    "&privacy_filter=1" +  // 1 signifies all public photos.
+    "&format=json&nojsoncallback=1";  // Er, nothing much to explain here.
+
+  // See the API in action here: http://www.flickr.com/services/api/explore/flickr.photosets.getPhotos
+  $.getJSON(URL, function(data){
+    $.each(data.photoset.photo, function(i, item){
+      // Creating the image URL. Info: http://www.flickr.com/services/api/misc.urls.html
+      var bg_src = "http://farm" + item.farm + ".static.flickr.com/" + item.server + "/" + item.id + "_" + item.secret + "_m.jpg";
+      var img_src = "http://farm" + item.farm + ".static.flickr.com/" + item.server + "/" + item.id + "_" + item.secret + "_m.jpg";
+
+      $("#flickr-images").append('<div class="pic"><a href="' + img_src + '" target="_blank" style=" background-image:url('+ bg_src +')"></a></div>');
+
+      //var img_thumb = $("<img/>").attr("src", img_src).css("margin", "8px")
+      //$(img_thumb).appendTo("#flickr-images");
+    });
+  });
+}
+
+$(document).ready(function() {
+  $('#load').fadeOut();
+  getImgs("72157635001529506"); // Call the function!
+});
+</script>
+
+
+</html>
